@@ -1,12 +1,33 @@
 import React from "react";
-import Login from "./components/views/login/login";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import "./App.scss";
+import Dashboard from "./components/views/dashboard/dashboard";
+import Login from "./components/views/login/login";
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route
+          path="/dashboard"
+          render={() => {
+            return localStorage.getItem("accessToken") ? (
+              <Dashboard />
+            ) : (
+              <Redirect to="/login" />
+            );
+          }}
+        ></Route>
+      </Switch>
+    </Router>
   );
 }
 

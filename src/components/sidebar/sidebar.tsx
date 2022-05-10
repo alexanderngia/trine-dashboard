@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./sidebar.module.scss";
 
 import { menuAdmin } from "../../constant/sidebar";
+import { DarkMode } from "../ui/darkmode/darkMode";
+import { NavLink } from "react-router-dom";
 
 export interface SidebarProps {}
 
@@ -20,19 +22,20 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             menuAdmin.map((menu) => {
               return (
                 <>
-                  <a className={styles["sidebar-link"]} href={menu.path}>
+                  <NavLink className={styles["sidebar-link"]} to={menu.path}>
                     <span
                       className={styles["icon"]}
                       dangerouslySetInnerHTML={{ __html: menu?.icon }}
                     />
                     {menu.title}
-                  </a>
+                  </NavLink>
                 </>
               );
             })
           )}
         </div>
       </div>
+      <DarkMode />
     </div>
   );
 };

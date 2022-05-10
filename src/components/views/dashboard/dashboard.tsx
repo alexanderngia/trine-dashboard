@@ -1,29 +1,30 @@
 import React from "react";
 import styles from "./dashboard.module.scss";
-import { useHistory } from "react-router-dom";
-import Sidebar from "../../sidebar/sidebar";
-import Header from "../../header/header";
-interface LoginProps {}
+import { Layout } from "../layout/layout";
+import { dataDB } from "../../../constant/data";
+import CardTotal from "../../ui/card/cardTotal";
 
-const Dashboard: React.FC<LoginProps> = (props) => {
-  const history = useHistory();
+export interface DashboardProps {}
 
-  const logout = () => {
-    localStorage.removeItem("accessToken");
-    history.replace("/login");
-  };
-
+const Dashboard: React.FC<DashboardProps> = (props) => {
   return (
-    <div className={styles["root"]}>
-
-      <div className={styles["container"]}>
-        <Sidebar />
-        <div className={styles["wrapper"]}>
-          <Header />
-          <div className={styles["main-container"]}></div>
+    <Layout>
+      <div className={styles["root"]}>
+        <div className={styles["summary"]}>
+          {React.Children.toArray(
+            dataDB.map((card) => {
+              return (
+                <CardTotal
+                  title={card.title}
+                  total={card.total}
+                  icon={card.icon}
+                />
+              );
+            })
+          )}
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

@@ -7,11 +7,4 @@
   height: 100vh;
   @include flex();
   background-color: $theme-bg;
-  align-items: baseline;
-}
-
-.summary {
-  width: 100%;
-  @include flex();
-  justify-content: space-between;
 }

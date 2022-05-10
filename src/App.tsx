@@ -6,6 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import "./App.scss";
+import { menuAdmin } from "./constant/sidebar";
 import Dashboard from "./components/views/dashboard/dashboard";
 import Login from "./components/views/login/login";
 
@@ -13,19 +14,33 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
         <Route
-          path="/dashboard"
+          path="/login"
           render={() => {
-            return localStorage.getItem("accessToken") ? (
-              <Dashboard />
+            return !localStorage.getItem("accessToken") ? (
+              <Login />
             ) : (
-              <Redirect to="/login" />
+              <Redirect to="/" />
             );
           }}
         ></Route>
+        {React.Children.toArray(
+          menuAdmin.map((route) => {
+            return (
+              <Route
+                exact
+                path={route.path}
+                render={() => {
+                  return localStorage.getItem("accessToken") ? (
+                    route?.page
+                  ) : (
+                    <Redirect to="/login" />
+                  );
+                }}
+              ></Route>
+            );
+          })
+        )}
       </Switch>
     </Router>
   );

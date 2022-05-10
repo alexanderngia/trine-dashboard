@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import styles from "./header.module.scss";
 import { menuUser } from "../../constant/profile";
+import { useHistory } from "react-router-dom";
+import { IoLogOut } from "react-icons/io5";
 
 export interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = (props) => {
   const [profile, setProfile] = useState(false);
+
+  const history = useHistory();
+
   const openMenuProfile = () => {
     setProfile(!profile);
-    console.log(profile);
+  };
+  const logOut = () => {
+    localStorage.removeItem("accessToken");
+    history.replace("/login");
   };
   return (
     <div className={styles["header"]}>
@@ -16,36 +24,48 @@ const Header: React.FC<HeaderProps> = (props) => {
         <input type="text" placeholder="Search" />
       </div>
       <div className={styles["user-settings"]}>
-        <div onClick={openMenuProfile} className={styles["user-profile"]}>
-          <img
-            alt="1"
-            className={styles["user-img"]}
-            src="https://images.unsplash.com/photo-1587918842454-870dbd18261a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=943&q=80"
-          />
-          <div className={styles["user-name"]}>Thomas</div>
-          <svg viewBox="0 0 492 492" fill="currentColor">
-            <path d="M484.13 124.99l-16.11-16.23a26.72 26.72 0 00-19.04-7.86c-7.2 0-13.96 2.79-19.03 7.86L246.1 292.6 62.06 108.55c-5.07-5.06-11.82-7.85-19.03-7.85s-13.97 2.79-19.04 7.85L7.87 124.68a26.94 26.94 0 000 38.06l219.14 219.93c5.06 5.06 11.81 8.63 19.08 8.63h.09c7.2 0 13.96-3.57 19.02-8.63l218.93-219.33A27.18 27.18 0 00492 144.1c0-7.2-2.8-14.06-7.87-19.12z"></path>
-          </svg>
-        </div>
-        {profile && (
-          <ul className={styles["menu-profile"]}>
-            {React.Children.toArray(
-              menuUser.map((profile) => {
-                return (
+        <ul>
+          <li className={styles["user-profile"]} onClick={openMenuProfile}>
+            <img
+              alt="1"
+              className={styles["user-img"]}
+              src="https://images.unsplash.com/photo-1587918842454-870dbd18261a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=943&q=80"
+            />
+            <div className={styles["user-name"]}>Alexander</div>
+            <svg viewBox="0 0 492 492" fill="currentColor">
+              <path d="M484.13 124.99l-16.11-16.23a26.72 26.72 0 00-19.04-7.86c-7.2 0-13.96 2.79-19.03 7.86L246.1 292.6 62.06 108.55c-5.07-5.06-11.82-7.85-19.03-7.85s-13.97 2.79-19.04 7.85L7.87 124.68a26.94 26.94 0 000 38.06l219.14 219.93c5.06 5.06 11.81 8.63 19.08 8.63h.09c7.2 0 13.96-3.57 19.02-8.63l218.93-219.33A27.18 27.18 0 00492 144.1c0-7.2-2.8-14.06-7.87-19.12z"></path>
+            </svg>
+          </li>
+          <li>
+            <ul className={styles["menu-profile"]}>
+              {profile && (
+                <span>
+                  {React.Children.toArray(
+                    menuUser.map((profile) => {
+                      return (
+                        <li>
+                          <a href={profile.path}>
+                            <span
+                              className={styles["icon"]}
+                              dangerouslySetInnerHTML={{ __html: profile.icon }}
+                            />
+                            <p>{profile.title}</p>
+                          </a>
+                        </li>
+                      );
+                    })
+                  )}
                   <li>
-                    <a href={profile.path}>
-                      <span
-                        className={styles["icon"]}
-                        dangerouslySetInnerHTML={{ __html: profile.icon }}
-                      />
-                      <p>{profile.title}</p>
+                    <a href="/login" onClick={logOut}>
+                      <IoLogOut className={styles["icon"]} />
+                      <p>Đăng Xuất</p>
                     </a>
                   </li>
-                );
-              })
-            )}
-          </ul>
-        )}
+                </span>
+              )}
+            </ul>
+          </li>
+        </ul>
 
         <div className={styles["notify"]}>
           <div className={styles["notification"]}></div>

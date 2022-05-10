@@ -24,11 +24,13 @@ const Login: React.FC<LoginProps> = (props) => {
       let data: any = await handleLoginApi(userName, userPass);
       if (data && data.errCode !== 0) {
         setErrMessage(data.message);
+        localStorage.setItem("accessToken", "false");
+        history.replace("/");
       }
       if (data && data.errCode === 0) {
         setErrMessage(data.message);
         localStorage.setItem("accessToken", "true");
-        history.replace("/dashboard");
+        history.replace("/");
       }
     } catch (error: any) {
       if (error.response) {

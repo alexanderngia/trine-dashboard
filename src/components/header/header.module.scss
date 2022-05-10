@@ -103,7 +103,8 @@
   align-items: flex-start;
   position: absolute;
   top: 65px;
-  right: 63px;
+  right: 73px;
+  z-index: 1;
   li {
     a {
       text-decoration: none;
@@ -132,18 +133,21 @@
           }
         }
       }
-      .icon {
-        background-color: $button-bg;
-        padding: 5px;
-        border-radius: 8px;
-
-        ion-icon {
-          font-size: 20px;
-        }
+      svg {
+        width: 20px;
+        height: 20px;
       }
-
       p {
         margin: 0 6px 0 12px;
+      }
+    }
+    .icon {
+      background-color: $button-bg;
+      padding: 5px;
+      border-radius: 8px;
+
+      ion-icon {
+        font-size: 20px;
       }
     }
   }

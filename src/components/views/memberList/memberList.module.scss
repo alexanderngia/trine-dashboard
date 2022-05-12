@@ -7,4 +7,85 @@
   height: 100vh;
   @include flex();
   background-color: $theme-bg;
+  flex-direction: column;
+  justify-content: flex-start;
+  h1 {
+    @include Heading();
+    color: $white;
+    font-family: $font-p;
+    font-size: 1.5rem;
+    line-height: 50px;
+    padding: $space;
+  }
+
+  ul {
+    @include Text();
+    width: 100%;
+    color: $white;
+    .card {
+      margin-bottom: 15px;
+      border-radius: 15px;
+      // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+      background-color: $button-bg;
+      &:hover {
+        transition: 0.3s all ease-in-out;
+        transform: scale(0.97);
+        &:nth-child(2n + 1) {
+          background: #ff7551;
+        }
+        &:nth-child(2n) {
+          background: #32a7e2;
+        }
+        &:nth-child(2n + 3) {
+          background: #6c5ecf;
+        }
+      }
+
+      a {
+        padding: 3%;
+        width: 100%;
+        text-decoration: none;
+        color: $white;
+        @include flex();
+
+        ul {
+          @include flex();
+          justify-content: space-between;
+          li {
+            width: 15%;
+            &:nth-of-type(2) {
+              width: 7%;
+            }
+            &:nth-of-type(3) {
+              width: 15%;
+            }
+            &:last-of-type {
+              width: 25%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // table {
+  //   font-family: $font-p;
+  //   width: 100%;
+  //   tr {
+  //     th {
+  //       font-weight: 700;
+  //       font-size: 1rem;
+  //     }
+  //     td {
+  //       text-align: left;
+  //       padding: 8px;
+  //     }
+  //   }
+  //   tbody {
+  //     tr {
+  //       border-radius: 5%;
+  //       border: 1px solid rgba($body-color, 0.5)
+  //     }
+  //   }
+  // }
 }

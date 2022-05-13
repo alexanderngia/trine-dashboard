@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./memberList.module.scss";
 import { Layout } from "../layout/layout";
-import Table from "../../ui/table/table";
-import { listName } from "./listName";
+import { ButtonMain } from "../../ui/button/button";
+import CardList from "../../ui/card/cardList/cardList";
+import { IoAdd, IoDownloadOutline } from "react-icons/io5";
 
 export interface MemberListProps {}
 
@@ -25,19 +26,26 @@ const MemberList: React.FC<MemberListProps> = (props) => {
       }
     };
     fetchData();
-  }, []);
+  }, [idUser]);
 
-  console.log(listName);
   return (
     <Layout>
       <div className={styles["root"]}>
         <h1>DANH SÁCH THÀNH VIÊN</h1>
+        <div className={styles["btn-container"]}>
+          <ButtonMain>
+            <IoAdd className={styles["icon"]} />
+          </ButtonMain>
+          <ButtonMain>
+            <IoDownloadOutline className={styles["icon"]} />
+          </ButtonMain>
+        </div>
         {data.length > 0 && (
-          <ul>
+          <ul className={styles["card-container"]}>
             {React.Children.toArray(
               data.map((listItems: any) => {
                 return (
-                  <li className={styles["card"]}>
+                  <CardList>
                     <a href="/#">
                       <ul>
                         <li>{listItems.fullNameUser}</li>
@@ -48,7 +56,7 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                         <li>{listItems.emailUser}</li>
                       </ul>
                     </a>
-                  </li>
+                  </CardList>
                 );
               })
             )}

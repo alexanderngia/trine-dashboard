@@ -7,4 +7,47 @@
   height: 100vh;
   @include flex();
   background-color: $theme-bg;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  h1 {
+    @include Heading();
+    color: $white;
+    font-family: $font-p;
+    font-size: 1.5rem;
+    line-height: 50px;
+    padding: 2% 0%;
+  }
+
+  .btn-container {
+    width: 100%;
+    margin-bottom: 20px;
+    @include flex();
+    justify-content: space-between;
+    .icon {
+      font-size: 20px;
+    }
+  }
+
+  .card-container {
+    width: 100%;
+
+    .card-custom {
+      a {
+        ul {
+          li {
+            &:first-of-type {
+              width: 4%;
+            }
+            &:nth-of-type(5) {
+              width: 20%;
+            }
+            &:last-of-type {
+              width: 8%;
+            }
+          }
+        }
+      }
+    }
+  }
 }

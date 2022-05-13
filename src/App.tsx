@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import { menuAdmin } from "./constant/sidebar";
-import Dashboard from "./components/views/dashboard/dashboard";
 import Login from "./components/views/login/login";
 
 function App() {
